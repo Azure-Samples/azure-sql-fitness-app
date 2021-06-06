@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:sharpnado="clr-namespace:Sharpnado.MaterialFrame;assembly=Sharpnado.MaterialFrame"
+             xmlns:viewModels="clr-namespace:FitApp.Core"
+             mc:Ignorable="d"
+             x:Class="FitApp.Core.Pages.WorkoutPage"
+             Title="//Build My Run">
+
+    <d:ContentPage.BindingContext>
+        <viewModels:WorkoutPageViewModel/>
+    </d:ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <maps:Map MapType="Street" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Grid.ColumnSpan="2">
+                <x:Arguments>
+                    <maps:MapSpan>
+                        <x:Arguments>
+                            <maps:Position>
+                                <x:Arguments>
+                                    <x:Double>47.620182</x:Double>
+                                    <x:Double>-122.34933</x:Double>
+                                </x:Arguments>
+                            </maps:Position>
+                            <x:Double>0.01</x:Double>
+                            <x:Double>0.01</x:Double>
+                        </x:Arguments>
+                    </maps:MapSpan>
+                </x:Arguments>
+            </maps:Map>
+
+            <sharpnado:MaterialFrame Style="{StaticResource AcrylicFrame}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                     Margin="20,50,20,0">
+                <Label Text="{Binding TimerDisplay}" FontFamily="segoeui" TextColor="{StaticResource DarkAccent}"
+                       FontSize="96" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            </sharpnado:MaterialFrame>
+
+
+            <sharpnado:MaterialFrame Style="{StaticResource AcrylicFrame}" Margin="20,100,20,0"
+                                     Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding NumberOfSteps}" FontSize="48" FontFamily="segoeui"/>
+                                <Span Text=" &#xf54b;" FontSize="48" FontFamily="fontawesomesolid" TextColor="{StaticResource DarkAccent}"/>                        
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding Distance}" FontSize="48" FontFamily="segoeui"/>
+                                <Span Text=" &#xf3fd;" FontFamily="fontawesomesolid" TextColor="{StaticResource DarkAccent}" FontSize="48"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+            </sharpnado:MaterialFrame>
+            
+
+            <sharpnado:MaterialFrame Style="{StaticResource AcrylicFrame}" Margin="20,50,20,50"
+                                     Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Label TextColor="{StaticResource DarkAccent}" FontSize="48"
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                           FontFamily="fontawesomesolid" Text="&#xf70c;" />
+
+                    <Label Text="{Binding UserId}" FontSize="42" FontFamily="segoeui" TextColor="{StaticResource DarkAccent}"
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                </StackLayout>
+            </sharpnado:MaterialFrame>
+            
+            
+            <sharpnado:MaterialFrame Margin="20,0,20,80" Style="{StaticResource AcrylicButton}"
+                                    Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                <Label Text="END WORKOUT" TextColor="White" FontAttributes="Bold" FontFamily="segoebold"
+                        HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                
+                <sharpnado:MaterialFrame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding EndWorkoutCommand}"/>
+                </sharpnado:MaterialFrame.GestureRecognizers>
+
+            </sharpnado:MaterialFrame>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

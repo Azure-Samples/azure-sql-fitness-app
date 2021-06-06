@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:sharpnado="clr-namespace:Sharpnado.MaterialFrame;assembly=Sharpnado.MaterialFrame"
+    x:Class="FitApp.Core.ExistingSessionView">
+    <ContentView.Content>
+        <StackLayout Padding="30,20,30,0">
+            <sharpnado:MaterialFrame Padding="20" Style="{StaticResource AcrylicFrame}">
+                <StackLayout>
+                    <Label Text="{Binding RecordedOnDisplay}" TextColor="Black">
+                            <Label.FormattedText>
+                                <FormattedString>                                    
+                                    <Span FontAttributes="Bold" FontSize="24" FontFamily="fontawesomesolid" Text="&#xf70c;"/>
+                                    <Span Text=" "/>
+                                    <Span FontAttributes="Bold" Text="{Binding RecordedOnDisplay}" FontFamily="segoeui"/>
+                                </FormattedString> 
+                            </Label.FormattedText>
+                        </Label>
+                    <Label Text="{Binding Steps, StringFormat='Number of steps: {0}'}" FontFamily="segoeui"/>
+                    <Label Text="{Binding Distance, StringFormat='Distance: {0}'}" FontFamily="segoeui"/>                    
+                </StackLayout>
+            </sharpnado:MaterialFrame>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:FitApp.Core"
+    mc:Ignorable="d"
+    x:Class="FitApp.Core.LoginPage"
+    Shell.PresentationMode="ModalAnimated"
+    Title="Login">
+
+    <d:ContentPage.BindingContext>
+        <viewModels:LoginPageViewModel/>
+    </d:ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+            <Label Text="Enter your username:"/>
+            <Entry Text="{Binding UserName}"/>
+            <Button Text="Save" Command="{Binding SaveUserNameCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

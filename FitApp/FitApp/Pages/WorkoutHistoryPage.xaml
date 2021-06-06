@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:FitApp.Core"
+    xmlns:sharpnado="clr-namespace:Sharpnado.MaterialFrame;assembly=Sharpnado.MaterialFrame"    
+    mc:Ignorable="d"    
+    x:Class="FitApp.Core.Pages.WorkoutHistoryPage"    
+    Title="//Build My Workout">
+
+    <d:ContentPage.BindingContext>
+        <local:WorkoutHistoryPageViewModel/>
+    </d:ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:BorderColorConverter x:Key="borderColor"/>
+
+            <DataTemplate x:Key="existingSessionTemplate">
+                <local:ExistingSessionView/>
+            </DataTemplate>
+            <DataTemplate x:Key="newSessionTemplate">
+                <local:NewSessionView/>
+            </DataTemplate>
+
+            <local:SessionViewSelector x:Key="sessionTemplateSelector"
+                                       NewSessionTemplate="{StaticResource newSessionTemplate}"
+                                       ExistingSessionTemplate="{StaticResource existingSessionTemplate}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>                
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="50" />                
+            </Grid.RowDefinitions>
+
+            <Image Source="backgroundimage" Grid.Row="0" Grid.RowSpan="3" Aspect="AspectFill" Opacity=".5"/>
+
+            <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding GetWorkoutHistoryCommand}" Grid.Row="0" Grid.RowSpan="3">
+                <CollectionView
+                    ItemsSource="{Binding TrainingSessions}" ItemTemplate="{StaticResource sessionTemplateSelector}"
+                    Grid.Row="0" Grid.RowSpan="3">
+                    
+                </CollectionView>
+            </RefreshView>
+                            
+            <sharpnado:MaterialFrame Margin="20,0,20,0" Style="{StaticResource AcrylicButton}" Grid.Row="1">
+                <Label Text="START WORKOUT" TextColor="White" FontAttributes="Bold" FontFamily="segoebold"
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                
+                <sharpnado:MaterialFrame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding StartNewWorkoutCommand}"/>
+                </sharpnado:MaterialFrame.GestureRecognizers>
+
+            </sharpnado:MaterialFrame>
+            
+        </Grid>
+    </ContentPage.Content>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Signout" Command="{Binding SignoutCommand}"/>
+    </ContentPage.ToolbarItems>
+
+</ContentPage>
